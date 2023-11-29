@@ -1,4 +1,3 @@
 # Game
-by Jannis and Lael
 
- 
+by Jannis and Lael
