@@ -26,6 +26,7 @@ class Main():
                         pygame.quit()
                         quit()
             
+            self.screen.fill('black')
             self.level.run()
             
             # update 60 times per second
