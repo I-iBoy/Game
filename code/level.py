@@ -14,6 +14,9 @@ class Level():
         self.setup_level(level_data)
         self.world_shift = 0
         self.current_x = 0
+        
+        # player
+        self.player_on_ground = False
     
     def setup_level(self,layout):
         self.tiles = pygame.sprite.Group()
@@ -59,6 +62,29 @@ class Level():
                     player.rect.right = sprite.rect.left
                     self.current_x = player.rect.right
     
+    def vertical_movement_collision(self):
+        player = self.player.sprite
+        player.get_gravity()
+        
+        for sprite in self.tiles.sprites():
+            if sprite.rect.colliderect(player.rect):
+                if player.direction.y > 0:
+                    player.rect.bottom = sprite.rect.top
+                    player.direction.y = 0
+                    player.on_ground = True
+                elif player.direction.y < 0:
+                    player.rect.top = sprite.rect.bottom
+                    player.direction.y = 0
+        
+        if player.on_ground and player.direction.y < 0 or player.direction.y > 1:
+            player.on_ground = False
+    
+    def check_player_on_ground(self):
+        if self.player.sprite.on_ground:
+            self.player_on_ground = True
+        else:
+            self.player_on_ground = False
+    
     def run(self):
         # level tiles
         self.tiles.update(self.world_shift)
@@ -68,4 +94,6 @@ class Level():
         # player
         self.player.update()
         self.horizontal_movement_collosion()
+        self.vertical_movement_collision()
+        self.check_player_on_ground()
         self.player.draw(self.display_surface)
