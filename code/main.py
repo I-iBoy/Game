@@ -11,7 +11,7 @@ class Main():
         pygame.display.set_caption("Winter Game")
         self.clock = pygame.time.Clock()    
         self.level = Level(level_map, self.screen)
-        
+    
     def run(self):
         while True:
             for event in pygame.event.get():
@@ -32,7 +32,6 @@ class Main():
             # update 60 times per second
             pygame.display.update()
             self.clock.tick(60)
-
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 import pygame
 from tiles import Tile
 from player import Player
-from setting import tile_size
+from setting import tile_size, screen_width
 
 
 class Level():
@@ -31,12 +31,41 @@ class Level():
                     player = Player((x,y),tile_size)
                     self.player.add(player)
     
-    def sroll_x(self):
-        pass
+    def scroll_x(self):
+        player = self.player.sprite
+        player_x = player.rect.centerx
+        direction_x = player.direction.x
+        
+        if player_x < screen_width / 4 and direction_x < 0:
+            self.world_shift = 8
+            player.speed = 0
+        elif player_x > screen_width - (screen_width / 4) and direction_x > 0:
+            self.world_shift = -8
+            player.speed = 0
+        else:
+            self.world_shift = 0
+            player.speed = 4
+    
+    def horizontal_movement_collosion(self):
+        player = self.player.sprite
+        player.rect.x += player.direction.x * player.speed
+        
+        for sprite in self.tiles.sprites():
+            if sprite.rect.colliderect(player.rect):
+                if player.direction.x < 0:
+                    player.rect.left = sprite.rect.right
+                    self.current_x = player.rect.left
+                elif player.direction.x > 0:
+                    player.rect.right = sprite.rect.left
+                    self.current_x = player.rect.right
     
     def run(self):
+        # level tiles
         self.tiles.update(self.world_shift)
         self.tiles.draw(self.display_surface)
+        self.scroll_x()
         
+        # player
         self.player.update()
+        self.horizontal_movement_collosion()
         self.player.draw(self.display_surface)
