@@ -13,6 +13,7 @@ class Level():
         self.display_surface = surface 
         self.setup_level(level_data)
         self.world_shift = 0
+        self.world_shift_setup = 25
         self.current_x = 0
         
         # player
@@ -39,17 +40,17 @@ class Level():
         player_x = player.rect.centerx
         direction_x = player.direction.x
         
-        if player_x < screen_width / 4 and direction_x < 0:
-            self.world_shift = 8
+        if player_x < (screen_width / 3) and direction_x < 0:
+            self.world_shift = self.world_shift_setup
             player.speed = 0
-        elif player_x > screen_width - (screen_width / 4) and direction_x > 0:
-            self.world_shift = -8
+        elif player_x > screen_width - (screen_width / 3) and direction_x > 0:
+            self.world_shift = self.world_shift_setup * -1
             player.speed = 0
         else:
             self.world_shift = 0
-            player.speed = 4
+            player.speed = player.real_speed
     
-    def horizontal_movement_collosion(self):
+    def horizontal_movement_collision(self):
         player = self.player.sprite
         player.rect.x += player.direction.x * player.speed
         
@@ -93,7 +94,7 @@ class Level():
         
         # player
         self.player.update()
-        self.horizontal_movement_collosion()
+        self.horizontal_movement_collision()
         self.vertical_movement_collision()
         self.check_player_on_ground()
         self.player.draw(self.display_surface)

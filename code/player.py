@@ -4,14 +4,15 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, pos, size):
         super().__init__()
         
-        # gernaral setup 
+        # general setup 
         self.image = pygame.Surface((size, size))
         self.image.fill('red')
         self.rect = self.image.get_rect(topleft = pos)
         
         # player movement 
         self.direction = pygame.math.Vector2(0, 0)
-        self.speed = 4
+        self.speed_setup = 3
+        self.speed = self.speed_setup
         self.gravity = 0.8
         self.jump_speed = -16
         
