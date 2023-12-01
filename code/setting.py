@@ -1,4 +1,5 @@
 
+# test level map
 level_map = [
 '                            ', # 0
 '                            ', # 1
@@ -14,7 +15,7 @@ level_map = [
 ]
 
 
-
+# general level settings 
 tile_size = 64
 screen_width = 1280
 screen_height = len(level_map) * tile_size

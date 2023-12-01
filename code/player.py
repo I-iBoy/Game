@@ -15,10 +15,10 @@ class Player(pygame.sprite.Sprite):
         self.speed = self.speed_setup
         self.gravity = 0.8
         self.jump_speed = -16
-        
         self.on_ground = False
     
     def get_input(self):
+        # control system for player movement
         keys = pygame.key.get_pressed()
         
         if keys[pygame.K_RIGHT]:
