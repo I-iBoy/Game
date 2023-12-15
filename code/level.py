@@ -31,7 +31,7 @@ class Level():
 				
                 # if there is a X => place a block
                 if cell == 'X':
-                    tile = Tile((x,y),tile_size)
+                    tile = Tile(x, y,tile_size)
                     self.tiles.add(tile)
                 
                 # if there is a P => place the player
@@ -40,7 +40,8 @@ class Level():
                     self.player.add(player)
                 
                 elif cell == 'C':
-                    coin = 
+                    coin = Coin(x, y, (tile_size/4))
+                    self.tiles.add(coin)
     
     def scroll_x(self):
         # scroll setup

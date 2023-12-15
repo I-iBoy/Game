@@ -17,5 +17,6 @@ level_map = [
 
 # general level settings 
 tile_size = 64
+half_tile_size = tile_size / 2
 screen_width = 1280
 screen_height = len(level_map) * tile_size
