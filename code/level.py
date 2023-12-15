@@ -1,5 +1,5 @@
 import pygame
-from tiles import Tile
+from tiles import Tile, Coin 
 from player import Player
 from setting import tile_size, screen_width
 
@@ -38,6 +38,9 @@ class Level():
                 elif cell == 'P':
                     player = Player((x,y),tile_size)
                     self.player.add(player)
+                
+                elif cell == 'C':
+                    coin = 
     
     def scroll_x(self):
         # scroll setup

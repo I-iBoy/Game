@@ -24,10 +24,10 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.direction.x = self.speed
         
-        elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.direction.x = self.speed * -1
         
-        elif keys[pygame.K_SPACE] and self.on_ground or keys[pygame.K_w] and self.on_ground:
+        if keys[pygame.K_SPACE] and self.on_ground or keys[pygame.K_w] and self.on_ground:
             self.direction.y = self.jump_speed
         
         else:
