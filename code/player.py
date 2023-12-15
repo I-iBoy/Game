@@ -21,13 +21,13 @@ class Player(pygame.sprite.Sprite):
         # control system for player movement
         keys = pygame.key.get_pressed()
         
-        if keys[pygame.K_RIGHT]:
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.direction.x = self.speed
         
-        elif keys[pygame.K_LEFT]:
+        elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.direction.x = self.speed * -1
         
-        elif keys[pygame.K_SPACE] and self.on_ground:
+        elif keys[pygame.K_SPACE] and self.on_ground or keys[pygame.K_w] and self.on_ground:
             self.direction.y = self.jump_speed
         
         else:

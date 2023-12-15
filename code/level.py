@@ -58,7 +58,7 @@ class Level():
         # no scroll
         else:
             self.world_shift = 0
-            player.speed = player.real_speed
+            player.speed = player.speed_setup
     
     def horizontal_movement_collision(self):
         # setup for horizontal movement
