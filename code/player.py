@@ -2,8 +2,9 @@ import pygame
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, size):
-        super().__init__()
-# control optimized        # general setup 
+        super().__init__() 
+        
+        # general setup 
         self.image = pygame.Surface((size, size))
         self.image.fill('red')
         self.rect = self.image.get_rect(topleft = pos)
