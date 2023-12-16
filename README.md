@@ -1,5 +1,4 @@
-
-# Winter Game
+# Winter Game 
 
 Winter Game ist ein einfaches Pygame-basiertes Spiel, das einen winterlichen Level darstellt. Der Code ist aufgeteilt in verschiedene Module und Klassen, um die Struktur und Lesbarkeit zu verbessern.
 
