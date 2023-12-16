@@ -12,7 +12,9 @@ class Level():
         self.display_surface = surface 
         self.setup_level(level_data)
         self.world_shift = 0
-        self.player_speed = 3                               # This may only be changed if the Player Speed has been changed (always must be the same)
+        self.player_speed = 3                               
+        # This may only be changed if the Player Speed has been changed (always must be the same)
+        
         self.world_shift_setup = self.player_speed * 10
         self.current_x = 0
         
@@ -44,6 +46,7 @@ class Level():
                     player = Player((x,y),tile_size)
                     self.player.add(player)
                 
+                # if there is a C => place a coin
                 elif cell == 'C':
                     coin = Coin(x, y, (tile_size/4))
                     self.tiles.add(coin)
