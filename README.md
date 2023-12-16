@@ -1,17 +1,18 @@
-# Winter Game 
+
+# Winter Game
 
 Winter Game ist ein einfaches Pygame-basiertes Spiel, das einen winterlichen Level darstellt. Der Code ist aufgeteilt in verschiedene Module und Klassen, um die Struktur und Lesbarkeit zu verbessern.
 
 ## Inhaltsverzeichnis
 
-1. [Allgemeine Informationen](https://chat.openai.com/c/f2111107-fd8a-498f-8735-58d4c02a251d#allgemeine-informationen)
-2. [Installation](https://chat.openai.com/c/f2111107-fd8a-498f-8735-58d4c02a251d#installation)
-3. [Anwendung](https://chat.openai.com/c/f2111107-fd8a-498f-8735-58d4c02a251d#anwendung)
-4. [Anpassung](https://chat.openai.com/c/f2111107-fd8a-498f-8735-58d4c02a251d#anpassung)
-5. [Spieler-Klasse](https://chat.openai.com/c/f2111107-fd8a-498f-8735-58d4c02a251d#spieler-klasse)
-6. [Tile-Klassen](https://chat.openai.com/c/f2111107-fd8a-498f-8735-58d4c02a251d#tile-klassen)
-7. [Hilfsfunktionen](https://chat.openai.com/c/f2111107-fd8a-498f-8735-58d4c02a251d#hilfsfunktionen)
-8. [Test-Level](https://chat.openai.com/c/f2111107-fd8a-498f-8735-58d4c02a251d#test-level)
+1. [Allgemeine Informationen](#allgemeine-informationen)
+2. [Installation](#installation)
+3. [Anwendung](#anwendung)
+4. [Anpassung](#anpassung)
+5. [Spieler-Klasse](#spieler-klasse)
+6. [Tile-Klassen](#tile-klassen)
+7. [Hilfsfunktionen](#hilfsfunktionen)
+8. [Test-Level](#test-level)
 
 ## Allgemeine Informationen
 
