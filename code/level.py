@@ -6,7 +6,7 @@ from setting import tile_size, screen_width
 
 class Level():
     
-    def __init__(self, level_data, surface):
+    def __init__(self, surface, create_overworld, change_health, level_data):
         
         # level setup
         self.display_surface = surface 
