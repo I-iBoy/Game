@@ -15,6 +15,10 @@ class Level():
         self.world_shift_setup = 25
         self.current_x = 0
         
+        # setup for extras 
+        self.coins = 0 
+        
+        
         # player setup
         self.player_on_ground = False
     

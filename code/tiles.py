@@ -3,7 +3,7 @@ from support import import_folder
 from setting import half_tile_size
 
 class Tile(pygame.sprite.Sprite):
-	def __init__(self,x, y,size):
+	def __init__(self,x, y, size):
 		super().__init__()
 		
 		# tile setup
