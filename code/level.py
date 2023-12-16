@@ -12,7 +12,7 @@ class Level():
         self.display_surface = surface 
         self.setup_level(level_data)
         self.world_shift = 0
-        self.player_speed = 3                               
+        self.player_speed = 2.5
         # This may only be changed if the Player Speed has been changed (always must be the same)
         
         self.world_shift_setup = self.player_speed * 10

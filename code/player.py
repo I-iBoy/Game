@@ -11,7 +11,7 @@ class Player(pygame.sprite.Sprite):
         
         # player movement 
         self.direction = pygame.math.Vector2(0, 0)
-        self.speed_setup = 3                        
+        self.speed_setup = 2.5
         # If this is changed, the player speed must also be changed to level
         
         self.speed = self.speed_setup
