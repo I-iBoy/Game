@@ -1,7 +1,7 @@
 import pygame
 from tiles import Tile, Coin 
 from player import Player
-from setting import tile_size, screen_width
+from setting import tile_size, screen_width, font_1
 from support import import_csv_layout
 
 class Level():
@@ -19,7 +19,7 @@ class Level():
         self.current_x = 0
         
         # setup for extras 
-        self.coins = 0 
+        self.coins = 2
         
         # player setup
         self.player_on_ground = False
@@ -58,18 +58,25 @@ class Level():
                     coin = Coin(x, y, tile_size)
                     self.tiles.add(coin)
     
-    def create_tile_group(self, layout, type):
-        sprite_group = pygame.sprite.Group()
+    # def create_tile_group(self, layout, type):
+    #     sprite_group = pygame.sprite.Group()
         
-        for row_index, row in enumerate(layout):
-            for col_index, cell in enumerate(row):
-                if cell != '-1':
-                    x = col_index * tile_size
-                    y = row_index * tile_size
-                    
-                    
-                    if type == 'coins':
-                        sprite = Coin(tile_size, x, y, '...') # ... => File path to the coin image 
+    #     for row_index, row in enumerate(layout):
+    #         for col_index, cell in enumerate(row):
+    #             if cell != '-1':
+    #                 x = col_index * tile_size
+    #                 y = row_index * tile_size
+    #                 if type == 'coins':
+    #                     sprite = Coin(tile_size, x, y, '...') # ... => File path to the coin image 
+    
+    def extra_tile_set(self):
+        self.extra_tiles = pygame.sprite.Group()
+        
+        x = 0*tile_size
+        y = 0*tile_size
+        
+        coin = Coin(x, y, tile_size)
+        self.extra_tiles.add(coin)
     
     def scroll_x(self):
         # scroll setup
@@ -143,12 +150,21 @@ class Level():
         else:
             self.player_on_ground = False
     
+    def coin_text(self):
+        pygame.font.init()
+        
+        x = tile_size * 1
+        y = tile_size * 0.37
+        
+        my_font = pygame.font.Font((font_1), 25)
+        text_surface = my_font.render(str(self.coins), True, (255,255,255))
+        
+        self.display_surface.blit(text_surface, (x, y))
+    
     def run(self):
         # level tiles
         self.tiles.update(self.world_shift)
         self.tiles.draw(self.display_surface)
-        # self.sprite_group.update(self.world_shift)
-        # self.sprite_group.draw(self.display_surface)
         self.scroll_x()
         
         # player
@@ -157,3 +173,9 @@ class Level():
         self.vertical_movement_collision()
         self.check_player_on_ground()
         self.player.draw(self.display_surface)
+        
+        # extras 
+        # coin display
+        self.extra_tile_set()
+        self.extra_tiles.draw(self.display_surface)
+        self.coin_text()
