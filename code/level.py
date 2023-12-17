@@ -6,11 +6,7 @@ from setting import tile_size, screen_width
 
 class Level():
     
-<<<<<<< HEAD
-    def __init__(self, level_data, surface):
-=======
     def __init__(self, surface, create_overworld, change_health, level_data):
->>>>>>> 057ca8f57ef6070173c4e7651830ce980ba61555
         
         # level setup
         self.display_surface = surface 
@@ -22,13 +18,10 @@ class Level():
         self.world_shift_setup = self.player_speed * 10
         self.current_x = 0
         
-<<<<<<< HEAD
-=======
         # setup for extras 
         self.coins = 0 
         
         
->>>>>>> 057ca8f57ef6070173c4e7651830ce980ba61555
         # player setup
         self.player_on_ground = False
     

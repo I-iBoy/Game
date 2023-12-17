@@ -48,12 +48,6 @@ class Game():
             self.level.run()
             self.check_game_over()
 
-<<<<<<< HEAD
-# call the main class
-if __name__ == "__main__":
-    main = Main()
-    main.run()
-=======
 # Pygame setup
 pygame.init()
 display_surface = pygame.display.set_mode((screen_width,screen_height))
@@ -73,4 +67,3 @@ while True:
     
     pygame.display.update()
     clock.tick(60)
->>>>>>> 057ca8f57ef6070173c4e7651830ce980ba61555

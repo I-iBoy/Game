@@ -13,9 +13,6 @@ class Tile(pygame.sprite.Sprite):
 	
 	def update(self,x_shift):
 		# move the tile 
-<<<<<<< HEAD
-		self.rect.x += x_shift
-=======
 		self.rect.x += x_shift
 
 class AnimatedTile(Tile):
@@ -52,4 +49,3 @@ class Coin(AnimatedTile):
         # self.image = pygame.Surface((size,size))
 		# self.image.fill('grey')
 		# self.rect = self.image.get_rect(topleft = (x, y))
->>>>>>> 057ca8f57ef6070173c4e7651830ce980ba61555
