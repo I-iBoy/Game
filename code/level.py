@@ -19,7 +19,7 @@ class Level():
         self.current_x = 0
         
         # setup for extras 
-        self.coins = 0 
+        self.coins_amount = 0 
         
         # player setup
         self.player_on_ground = False
@@ -28,13 +28,13 @@ class Level():
         # Tile spawn setup 
         # coins
         # coin_layout = import_csv_layout(level_data['coins'])
-        # self.coin_sprites = self.create_tile_group(coin_layout, 'coins')
-        
+        # self.coin_sprites = self.create_tile_group(level_data, 'coins')
     
     def setup_level(self, layout):
         # create all sprites 
         self.tiles = pygame.sprite.Group()
         self.player = pygame.sprite.GroupSingle()
+        self.coins = pygame.sprite.Group()
         self.sprite_group = pygame.sprite.Group()
         
         # check every row and every colum
@@ -63,13 +63,17 @@ class Level():
         
         for row_index, row in enumerate(layout):
             for col_index, cell in enumerate(row):
-                if cell != '-1':
+                if cell != ' ':
                     x = col_index * tile_size
                     y = row_index * tile_size
                     
                     
-                    if type == 'coins':
-                        sprite = Coin(tile_size, x, y, '...') # ... => File path to the coin image 
+                    # if type == 'coins':
+                    if cell == 'C':
+                        sprite = Coin(x, y, tile_size) # ... => File path to the coin image 
+                        sprite_group.add(sprite)
+        
+        return sprite_group
     
     def scroll_x(self):
         # scroll setup
@@ -143,6 +147,13 @@ class Level():
         else:
             self.player_on_ground = False
     
+    def check_coin_collisions(self):
+        collided_coins = pygame.sprite.spritecollide(self.player.sprite, self.coin_sprites, True)
+        if collided_coins:
+            for coin in collided_coins:
+                self.change_coins(coin.value)
+                print("coin collision")
+    
     def run(self):
         # level tiles
         self.tiles.update(self.world_shift)
@@ -155,5 +166,10 @@ class Level():
         self.player.update()
         self.horizontal_movement_collision()
         self.vertical_movement_collision()
-        self.check_player_on_ground()
         self.player.draw(self.display_surface)
+        
+        self.check_player_on_ground()
+        self.check_coin_collisions
+        
+        # extras
+        self.coins.draw(self.display_surface)

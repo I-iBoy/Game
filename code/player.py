@@ -25,19 +25,15 @@ class Player(pygame.sprite.Sprite):
         
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.direction.x = self.speed
-            print("right")
         
         elif keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.direction.x = self.speed * -1
-            print("left")
         
         elif keys[pygame.K_SPACE] and self.on_ground or keys[pygame.K_w] and self.on_ground or keys[pygame.K_UP] and self.on_ground:
             self.direction.y = self.jump_speed
-            print("jump")
         
         else:
             self.direction.x = 0
-            # print("nothing")
     
     def get_gravity(self):
         self.direction.y += self.gravity 
