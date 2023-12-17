@@ -37,7 +37,7 @@ class Player(pygame.sprite.Sprite):
         
         else:
             self.direction.x = 0
-            print("nothing")
+            # print("nothing")
     
     def get_gravity(self):
         self.direction.y += self.gravity 

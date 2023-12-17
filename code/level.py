@@ -2,7 +2,7 @@ import pygame
 from tiles import Tile, Coin 
 from player import Player
 from setting import tile_size, screen_width
-
+from support import import_csv_layout
 
 class Level():
     
@@ -21,14 +21,21 @@ class Level():
         # setup for extras 
         self.coins = 0 
         
-        
         # player setup
         self.player_on_ground = False
+        
+        
+        # Tile spawn setup 
+        # coins
+        # coin_layout = import_csv_layout(level_data['coins'])
+        # self.coin_sprites = self.create_tile_group(coin_layout, 'coins')
+        
     
-    def setup_level(self,layout):
+    def setup_level(self, layout):
         # create all sprites 
         self.tiles = pygame.sprite.Group()
         self.player = pygame.sprite.GroupSingle()
+        self.sprite_group = pygame.sprite.Group()
         
         # check every row and every colum
         for row_index,row in enumerate(layout):
@@ -48,8 +55,21 @@ class Level():
                 
                 # if there is a C => place a coin
                 elif cell == 'C':
-                    coin = Coin(x, y, (tile_size/4))
+                    coin = Coin(x, y, tile_size)
                     self.tiles.add(coin)
+    
+    def create_tile_group(self, layout, type):
+        sprite_group = pygame.sprite.Group()
+        
+        for row_index, row in enumerate(layout):
+            for col_index, cell in enumerate(row):
+                if cell != '-1':
+                    x = col_index * tile_size
+                    y = row_index * tile_size
+                    
+                    
+                    if type == 'coins':
+                        sprite = Coin(tile_size, x, y, '...') # ... => File path to the coin image 
     
     def scroll_x(self):
         # scroll setup
@@ -127,6 +147,8 @@ class Level():
         # level tiles
         self.tiles.update(self.world_shift)
         self.tiles.draw(self.display_surface)
+        # self.sprite_group.update(self.world_shift)
+        # self.sprite_group.draw(self.display_surface)
         self.scroll_x()
         
         # player
