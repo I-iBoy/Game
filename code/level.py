@@ -66,8 +66,6 @@ class Level():
     #             if cell != '-1':
     #                 x = col_index * tile_size
     #                 y = row_index * tile_size
-                    
-                    
     #                 if type == 'coins':
     #                     sprite = Coin(tile_size, x, y, '...') # ... => File path to the coin image 
     
