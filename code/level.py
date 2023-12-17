@@ -175,7 +175,6 @@ class Level():
         self.player.draw(self.display_surface)
         
         # extras 
-        # coin display
         self.extra_tile_set()
         self.extra_tiles.draw(self.display_surface)
         self.coin_text()
