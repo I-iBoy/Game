@@ -1,20 +1,34 @@
 import pygame
-from tiles import Tile
+from tiles import Tile, Coin 
 from player import Player
 from setting import tile_size, screen_width
 
 
 class Level():
     
+<<<<<<< HEAD
     def __init__(self, level_data, surface):
+=======
+    def __init__(self, surface, create_overworld, change_health, level_data):
+>>>>>>> 057ca8f57ef6070173c4e7651830ce980ba61555
         
         # level setup
         self.display_surface = surface 
         self.setup_level(level_data)
         self.world_shift = 0
-        self.world_shift_setup = 25
+        self.player_speed = 2.5
+        # This may only be changed if the Player Speed has been changed (always must be the same)
+        
+        self.world_shift_setup = self.player_speed * 10
         self.current_x = 0
         
+<<<<<<< HEAD
+=======
+        # setup for extras 
+        self.coins = 0 
+        
+        
+>>>>>>> 057ca8f57ef6070173c4e7651830ce980ba61555
         # player setup
         self.player_on_ground = False
     
@@ -31,13 +45,18 @@ class Level():
 				
                 # if there is a X => place a block
                 if cell == 'X':
-                    tile = Tile((x,y),tile_size)
+                    tile = Tile(x, y,tile_size)
                     self.tiles.add(tile)
                 
                 # if there is a P => place the player
                 elif cell == 'P':
                     player = Player((x,y),tile_size)
                     self.player.add(player)
+                
+                # if there is a C => place a coin
+                elif cell == 'C':
+                    coin = Coin(x, y, (tile_size/4))
+                    self.tiles.add(coin)
     
     def scroll_x(self):
         # scroll setup

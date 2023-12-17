@@ -1,39 +1,76 @@
-import pygame
-from setting import *
+import pygame, sys
+from setting import screen_width, screen_height, level_map
+from overworld import Overworld
 from level import Level
 
-class Main():
-    
+class Game():
     def __init__(self):
-        # display setup
-        pygame.init()
-        self.screen = pygame.display.set_mode((screen_width, screen_height))
-        pygame.display.set_caption("Winter Game")
-        self.clock = pygame.time.Clock()    
-        self.level = Level(level_map, self.screen)
+        
+        # game attributes
+        self.max_level = 0
+        self.max_health = 100
+        self.cur_health = 100
+        self.coins = 0
+        self.level_map = level_map
+        
+        # overworld creation
+        self.overworld = Overworld(0, self.max_level, display_surface, self.create_level)
+        self.status = 'overworld'
+    
+    def create_level(self):
+        self.level = Level(display_surface, self.create_overworld, self.change_health, self.level_map)
+        self.status = 'level'
+    
+    def create_overworld(self, current_level, new_max_level):
+        if new_max_level > self.max_level:
+            self.max_level = new_max_level
+        self.overworld = Overworld(current_level, self.max_level, display_surface, self.create_level)
+        self.status = 'overworld'
+    
+    def change_coins(self, amount):
+        self.coins += amount
+    
+    def change_health(self, amount):
+        self.cur_health += amount
+    
+    def check_game_over(self):
+        if self.cur_health <= 0:
+            self.cur_health = 100
+            self.coins = 0
+            self.max_level = 0
+            self.overworld = Overworld(0, self.max_level, display_surface, self.create_level)
+            self.status = 'overworld'
     
     def run(self):
-        while True:
-            for event in pygame.event.get():
-                # quit the game by pressing the cross button
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    quit()
-                
-                # quit the game by pressing ESCAPE
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        pygame.quit()
-                        quit()
-            
-            self.screen.fill('black')
+        if self.status == 'overworld':
+            self.overworld.run()
+        else:
             self.level.run()
-            
-            # update 60 times per second
-            pygame.display.update()
-            self.clock.tick(60)
+            self.check_game_over()
 
+<<<<<<< HEAD
 # call the main class
 if __name__ == "__main__":
     main = Main()
     main.run()
+=======
+# Pygame setup
+pygame.init()
+display_surface = pygame.display.set_mode((screen_width,screen_height))
+clock = pygame.time.Clock()
+game = Game()
+
+while True:
+    for event in pygame.event.get():
+        keys = pygame.key.get_pressed()
+        
+        if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]: 
+            pygame.quit()
+            sys.exit()
+    
+    display_surface.fill('black')
+    game.run()
+    
+    pygame.display.update()
+    clock.tick(60)
+>>>>>>> 057ca8f57ef6070173c4e7651830ce980ba61555
