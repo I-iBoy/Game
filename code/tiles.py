@@ -45,4 +45,3 @@ class Coin(StaticTile):
         center_x = x + int(size / 2)
         center_y = y + int(size / 2)
         self.rect = self.image.get_rect(center = (center_x, center_y))
-        # self.value = value
