@@ -58,7 +58,7 @@ class Level():
                     coin = Coin(x, y, tile_size)
                     self.coins.add(coin)
     
-    def create_tile_group(self, layout, type):
+    # def create_tile_group(self, layout, type):
         sprite_group = pygame.sprite.Group()
         
         for row_index, row in enumerate(layout):
@@ -187,6 +187,4 @@ class Level():
         self.vertical_movement_collision()
         
         self.check_player_on_ground()
-        self.check_coin_collisions()
-        
-        self.coin_text()
+        self.player.draw(self.display_surface)

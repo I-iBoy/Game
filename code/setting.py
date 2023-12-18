@@ -21,5 +21,10 @@ half_tile_size = tile_size / 2
 screen_width = 1280
 screen_height = len(level_map) * tile_size
 
+<<<<<<< HEAD
 # fonts
 font_1 = ".\images/fonts/my_font.ttf"
+=======
+# font
+font_1 = "./images/fonts/my_font.ttf"
+>>>>>>> main
