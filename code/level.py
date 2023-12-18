@@ -169,6 +169,17 @@ class Level():
                 self.coins_amount += 1
                 print("coin collision")
     
+    def coin_text(self):
+        pygame.font.init()
+        
+        x = tile_size * 1
+        y = tile_size * 0.37
+        
+        my_font = pygame.font.Font((font_1), 25)
+        text_surface = my_font.render(str(self.coins), True, (255,255,255))
+        
+        self.display_surface.blit(text_surface, (x, y))
+    
     def update_and_draw(self):
         # level Tiles
         self.tiles.update(self.world_shift)
@@ -190,4 +201,4 @@ class Level():
         self.vertical_movement_collision()
         
         self.check_player_on_ground()
-        self.check_coin_collisions()
+        self.player.draw(self.display_surface)
