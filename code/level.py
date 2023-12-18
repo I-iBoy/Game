@@ -59,24 +59,21 @@ class Level():
                     self.coins.add(coin)
     
     # def create_tile_group(self, layout, type):
-    #     sprite_group = pygame.sprite.Group()
+        sprite_group = pygame.sprite.Group()
         
-    #     for row_index, row in enumerate(layout):
-    #         for col_index, cell in enumerate(row):
-    #             if cell != '-1':
-    #                 x = col_index * tile_size
-    #                 y = row_index * tile_size
-    #                 if type == 'coins':
-    #                     sprite = Coin(tile_size, x, y, '...') # ... => File path to the coin image 
-    
-    def extra_tile_set(self):
-        self.extra_tiles = pygame.sprite.Group()
+        for row_index, row in enumerate(layout):
+            for col_index, cell in enumerate(row):
+                if cell != ' ':
+                    x = col_index * tile_size
+                    y = row_index * tile_size
+                    
+                    
+                    # if type == 'coins':
+                    if cell == 'C':
+                        sprite = Coin(x, y, tile_size) # ... => File path to the coin image 
+                        sprite_group.add(sprite)
         
-        x = 0*tile_size
-        y = 0*tile_size
-        
-        coin = Coin(x, y, tile_size)
-        self.extra_tiles.add(coin)
+        return sprite_group
     
     def scroll_x(self):
         # scroll setup
@@ -150,17 +147,6 @@ class Level():
         else:
             self.player_on_ground = False
     
-    def coin_text(self):
-        pygame.font.init()
-        
-        x = tile_size * 1
-        y = tile_size * 0.37
-        
-        my_font = pygame.font.Font((font_1), 25)
-        text_surface = my_font.render(str(self.coins), True, (255,255,255))
-        
-        self.display_surface.blit(text_surface, (x, y))
-    
     def check_coin_collisions(self):
         collided_coins = pygame.sprite.spritecollide(self.player.sprite, self.coins, True)
         if collided_coins:
@@ -180,8 +166,8 @@ class Level():
         
         self.display_surface.blit(text_surface, (x, y))
     
-    def update_and_draw(self):
-        # level Tiles
+    def run(self):
+        # level tiles
         self.tiles.update(self.world_shift)
         self.tiles.draw(self.display_surface)
         
@@ -201,6 +187,10 @@ class Level():
         self.vertical_movement_collision()
         
         self.check_player_on_ground()
-        self.check_coin_collisions()
+        self.player.draw(self.display_surface)
         
+        # extras 
+        # coin display
+        self.extra_tile_set()
+        self.extra_tiles.draw(self.display_surface)
         self.coin_text()
