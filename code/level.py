@@ -1,7 +1,7 @@
 import pygame
 from tiles import Tile, Coin 
 from player import Player
-from setting import tile_size, screen_width
+from setting import tile_size, screen_width, font_1
 from support import import_csv_layout
 
 class Level():
@@ -58,7 +58,7 @@ class Level():
                     coin = Coin(x, y, tile_size)
                     self.coins.add(coin)
     
-    def create_tile_group(self, layout, type):
+    # def create_tile_group(self, layout, type):
         sprite_group = pygame.sprite.Group()
         
         for row_index, row in enumerate(layout):
@@ -155,6 +155,17 @@ class Level():
                 self.coins_amount += 1
                 print("coin collision")
     
+    def coin_text(self):
+        pygame.font.init()
+        
+        x = tile_size * 1
+        y = tile_size * 0.37
+        
+        my_font = pygame.font.Font((font_1), 25)
+        text_surface = my_font.render(str(self.coins), True, (255,255,255))
+        
+        self.display_surface.blit(text_surface, (x, y))
+    
     def update_and_draw(self):
         # level Tiles
         self.tiles.update(self.world_shift)
@@ -176,4 +187,4 @@ class Level():
         self.vertical_movement_collision()
         
         self.check_player_on_ground()
-        self.check_coin_collisions()
+        self.player.draw(self.display_surface)
