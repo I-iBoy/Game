@@ -54,6 +54,11 @@ display_surface = pygame.display.set_mode((screen_width,screen_height))
 clock = pygame.time.Clock()
 game = Game()
 
+# window setup
+pygame.display.set_caption('Winter Game')
+pygame_icon = pygame.image.load('./images/window/icon.png')
+pygame.display.set_icon(pygame_icon)
+
 while True:
     for event in pygame.event.get():
         keys = pygame.key.get_pressed()

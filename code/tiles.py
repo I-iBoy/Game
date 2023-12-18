@@ -43,7 +43,7 @@ class AnimatedTile(Tile):
 
 class Coin(StaticTile):
     def __init__(self, x, y, size, value=None):
-        super().__init__(size, x, y, pygame.image.load('G:\Programmieren\Projekte\Game\images\coins\silver.png').convert_alpha())
+        super().__init__(size, x, y, pygame.image.load('.\images\coins\silver.png').convert_alpha())
         center_x = x + int(size / 2)
         center_y = y + int(size / 2)
         self.rect = self.image.get_rect(center = (center_x, center_y))

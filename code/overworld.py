@@ -22,18 +22,27 @@ class Overworld():
         self.start_time = pygame.time.get_ticks()
         self.allow_input = False
         self.timer_length = 300
+        
+        # background
+        self.opacity = 80
     
-    def draw(self, surface):
-        self.image = pygame.Surface(((screen_height, screen_width)))
-        self.image.fill('red')
+    def background(self):
+        bg = pygame.image.load('./images/overworld/christmas_bg.jpg')
+        scaled_bg = pygame.transform.scale(bg, (screen_width, screen_height))
+        self.display_surface.blit(scaled_bg, (0, 0))
+        
+        self.image = pygame.Surface((screen_height, screen_width))
+        self.image.fill('black')
+        scaled_overlay = pygame.transform.scale(self.image, (screen_width, screen_height))
+        transparent_overlay = scaled_overlay.set_alpha(self.opacity)
+        self.display_surface.blit(scaled_overlay, (0, 0))
     
     def get_input(self):
-        # control system for player movement
         keys = pygame.key.get_pressed()
         
         if keys[pygame.K_l]:
             self.create_level()
     
     def run(self):
-        self.draw(self.display_surface)
+        self.background()
         self.get_input()
