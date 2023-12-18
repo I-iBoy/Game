@@ -1,6 +1,5 @@
 import pygame 
 from support import import_folder
-from setting import half_tile_size
 
 class Tile(pygame.sprite.Sprite):
 	def __init__(self,x, y, size):

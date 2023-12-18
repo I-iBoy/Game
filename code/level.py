@@ -58,23 +58,6 @@ class Level():
                     coin = Coin(x, y, tile_size)
                     self.coins.add(coin)
     
-    # def create_tile_group(self, layout, type):
-        sprite_group = pygame.sprite.Group()
-        
-        for row_index, row in enumerate(layout):
-            for col_index, cell in enumerate(row):
-                if cell != ' ':
-                    x = col_index * tile_size
-                    y = row_index * tile_size
-                    
-                    
-                    # if type == 'coins':
-                    if cell == 'C':
-                        sprite = Coin(x, y, tile_size) # ... => File path to the coin image 
-                        sprite_group.add(sprite)
-        
-        return sprite_group
-    
     def scroll_x(self):
         # scroll setup
         player = self.player.sprite
