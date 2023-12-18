@@ -201,4 +201,6 @@ class Level():
         self.vertical_movement_collision()
         
         self.check_player_on_ground()
-        self.player.draw(self.display_surface)
+        self.check_coin_collisions()
+        
+        self.coin_text()
