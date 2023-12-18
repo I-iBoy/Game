@@ -11,6 +11,7 @@ class Level():
         # level setup
         self.display_surface = surface 
         self.setup_level(level_data)
+        self.setup_extra_tiles()
         self.world_shift = 0
         self.player_speed = 2.5
         # This may only be changed if the Player Speed has been changed (always must be the same)
@@ -35,7 +36,6 @@ class Level():
         self.tiles = pygame.sprite.Group()
         self.player = pygame.sprite.GroupSingle()
         self.coins = pygame.sprite.Group()
-        self.sprite_group = pygame.sprite.Group()
         
         # check every row and every colum
         for row_index,row in enumerate(layout):
@@ -165,6 +165,12 @@ class Level():
         
         self.display_surface.blit(text_surface, (x, y))
     
+    def setup_extra_tiles(self):
+        self.extra_tiles = pygame.sprite.Group()
+        
+        coin = Coin(0.8, 0.4, tile_size)
+        self.extra_tiles.add(coin)
+    
     def update_and_draw(self):
         # level tiles
         self.tiles.update(self.world_shift)
@@ -177,6 +183,9 @@ class Level():
         # coins
         self.coins.update(self.world_shift)
         self.coins.draw(self.display_surface)
+        
+        # extra tiles
+        self.extra_tiles.draw(self.display_surface)
     
     def run(self):
         self.update_and_draw()
@@ -189,8 +198,4 @@ class Level():
         self.check_player_on_ground()
         self.check_coin_collisions()
         
-        # extras 
-        # coin display
-        # self.extra_tile_set()
-        # self.extra_tiles.draw(self.display_surface)
         self.coin_text()
