@@ -19,7 +19,7 @@ class Level():
         self.current_x = 0
         
         # setup for extras 
-        self.coins = 2
+        self.coins_amount = 0 
         
         # player setup
         self.player_on_ground = False
@@ -28,13 +28,13 @@ class Level():
         # Tile spawn setup 
         # coins
         # coin_layout = import_csv_layout(level_data['coins'])
-        # self.coin_sprites = self.create_tile_group(coin_layout, 'coins')
-        
+        # self.coin_sprites = self.create_tile_group(level_data, 'coins')
     
     def setup_level(self, layout):
         # create all sprites 
         self.tiles = pygame.sprite.Group()
         self.player = pygame.sprite.GroupSingle()
+        self.coins = pygame.sprite.Group()
         self.sprite_group = pygame.sprite.Group()
         
         # check every row and every colum
@@ -56,27 +56,24 @@ class Level():
                 # if there is a C => place a coin
                 elif cell == 'C':
                     coin = Coin(x, y, tile_size)
-                    self.tiles.add(coin)
+                    self.coins.add(coin)
     
     # def create_tile_group(self, layout, type):
-    #     sprite_group = pygame.sprite.Group()
+        sprite_group = pygame.sprite.Group()
         
-    #     for row_index, row in enumerate(layout):
-    #         for col_index, cell in enumerate(row):
-    #             if cell != '-1':
-    #                 x = col_index * tile_size
-    #                 y = row_index * tile_size
-    #                 if type == 'coins':
-    #                     sprite = Coin(tile_size, x, y, '...') # ... => File path to the coin image 
-    
-    def extra_tile_set(self):
-        self.extra_tiles = pygame.sprite.Group()
+        for row_index, row in enumerate(layout):
+            for col_index, cell in enumerate(row):
+                if cell != ' ':
+                    x = col_index * tile_size
+                    y = row_index * tile_size
+                    
+                    
+                    # if type == 'coins':
+                    if cell == 'C':
+                        sprite = Coin(x, y, tile_size) # ... => File path to the coin image 
+                        sprite_group.add(sprite)
         
-        x = 0*tile_size
-        y = 0*tile_size
-        
-        coin = Coin(x, y, tile_size)
-        self.extra_tiles.add(coin)
+        return sprite_group
     
     def scroll_x(self):
         # scroll setup
@@ -150,6 +147,13 @@ class Level():
         else:
             self.player_on_ground = False
     
+    def check_coin_collisions(self):
+        collided_coins = pygame.sprite.spritecollide(self.player.sprite, self.coins, True)
+        if collided_coins:
+            for coin in collided_coins:
+                # self.change_coins(coin.value)
+                self.coins_amount += 1
+    
     def coin_text(self):
         pygame.font.init()
         
@@ -157,25 +161,36 @@ class Level():
         y = tile_size * 0.37
         
         my_font = pygame.font.Font((font_1), 25)
-        text_surface = my_font.render(str(self.coins), True, (255,255,255))
+        text_surface = my_font.render(str(self.coins_amount), True, (255,255,255))
         
         self.display_surface.blit(text_surface, (x, y))
     
-    def run(self):
+    def update_and_draw(self):
         # level tiles
         self.tiles.update(self.world_shift)
         self.tiles.draw(self.display_surface)
-        self.scroll_x()
         
         # player
         self.player.update()
+        self.player.draw(self.display_surface)
+        
+        # coins
+        self.coins.update(self.world_shift)
+        self.coins.draw(self.display_surface)
+    
+    def run(self):
+        self.update_and_draw()
+        self.scroll_x()
+        
+        # player
         self.horizontal_movement_collision()
         self.vertical_movement_collision()
+        
         self.check_player_on_ground()
-        self.player.draw(self.display_surface)
+        self.check_coin_collisions()
         
         # extras 
         # coin display
-        self.extra_tile_set()
-        self.extra_tiles.draw(self.display_surface)
+        # self.extra_tile_set()
+        # self.extra_tiles.draw(self.display_surface)
         self.coin_text()
