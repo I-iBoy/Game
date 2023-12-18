@@ -56,7 +56,7 @@ class Level():
                 # if there is a C => place a coin
                 elif cell == 'C':
                     coin = Coin(x, y, tile_size)
-                    self.tiles.add(coin)
+                    self.coins.add(coin)
     
     def create_tile_group(self, layout, type):
         sprite_group = pygame.sprite.Group()
@@ -148,28 +148,32 @@ class Level():
             self.player_on_ground = False
     
     def check_coin_collisions(self):
-        collided_coins = pygame.sprite.spritecollide(self.player.sprite, self.coin_sprites, True)
+        collided_coins = pygame.sprite.spritecollide(self.player.sprite, self.coins, True)
         if collided_coins:
             for coin in collided_coins:
-                self.change_coins(coin.value)
+                # self.change_coins(coin.value)
+                self.coins_amount += 1
                 print("coin collision")
     
-    def run(self):
-        # level tiles
+    def update_and_draw(self):
+        # level Tiles
         self.tiles.update(self.world_shift)
         self.tiles.draw(self.display_surface)
-        # self.sprite_group.update(self.world_shift)
-        # self.sprite_group.draw(self.display_surface)
-        self.scroll_x()
         
         # player
         self.player.update()
-        self.horizontal_movement_collision()
-        self.vertical_movement_collision()
         self.player.draw(self.display_surface)
         
-        self.check_player_on_ground()
-        self.check_coin_collisions
-        
-        # extras
+        # coins
         self.coins.draw(self.display_surface)
+    
+    def run(self):
+        self.update_and_draw()
+        self.scroll_x()
+        
+        # player
+        self.horizontal_movement_collision()
+        self.vertical_movement_collision()
+        
+        self.check_player_on_ground()
+        self.check_coin_collisions()
