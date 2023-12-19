@@ -49,3 +49,11 @@ class Coin(StaticTile):
         center_y = y + int(size / 2)
         self.rect = self.image.get_rect(center = (center_x, center_y))
         self.value = value
+
+class Gift(StaticTile):
+    def __init__(self, x, y, size, value=None):
+        super().__init__(size, x, y, pygame.image.load('.\images\gifts/red.png').convert_alpha())   #TODO - change image
+        center_x = x + int(size / 2)
+        center_y = y + int(size / 2)
+        self.rect = self.image.get_rect(center = (center_x, center_y))
+        self.value = value
