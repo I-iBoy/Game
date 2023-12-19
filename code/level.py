@@ -1,11 +1,11 @@
 import pygame
 from tiles import Tile, Coin 
 from player import Player
-from setting import tile_size, screen_width, font_1
+from setting import tile_size, screen_width, screen_height,font_1
 from support import import_csv_layout
 
 class Level():
-    def __init__(self, surface, create_overworld, change_health, level_data):
+    def __init__(self, current_level,surface, create_overworld, change_health, level_data):
         
         # level setup
         self.display_surface = surface 
@@ -17,6 +17,10 @@ class Level():
         
         self.world_shift_setup = self.player_speed * 10
         self.current_x = 0
+        
+        # overworld connection
+        self.create_overworld = create_overworld
+        self.current_level = current_level
         
         # setup for extras 
         self.coins_amount = 0 
@@ -153,6 +157,10 @@ class Level():
         coin = Coin(0.8, 0.4, tile_size)
         self.extra_tiles.add(coin)
     
+    def check_death(self):
+        if self.player.sprite.rect.top > screen_height:
+            self.create_overworld(self.current_level, 0)
+    
     def update_and_draw(self):
         # level tiles
         self.tiles.update(self.world_shift)
@@ -179,5 +187,7 @@ class Level():
         
         self.check_player_on_ground()
         self.check_coin_collisions()
+        
+        self.check_death()
         
         self.coin_text()

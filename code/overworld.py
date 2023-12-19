@@ -43,7 +43,7 @@ class Overworld():
         keys = pygame.key.get_pressed()
         
         if keys[pygame.K_l]:
-            self.create_level()
+            self.create_level(self.current_level)
     
     def run(self):
         self.background()

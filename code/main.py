@@ -17,8 +17,8 @@ class Game():
         self.overworld = Overworld(0, self.max_level, display_surface, self.create_level)
         self.status = 'overworld'
     
-    def create_level(self):
-        self.level = Level(display_surface, self.create_overworld, self.change_health, self.level_map)
+    def create_level(self, current_level):
+        self.level = Level(current_level, display_surface, self.create_overworld, self.change_health, self.level_map)
         self.status = 'level'
     
     def create_overworld(self, current_level, new_max_level):
