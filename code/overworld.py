@@ -27,10 +27,12 @@ class Overworld():
         self.opacity = 80
     
     def background(self):
+        # background image
         bg = pygame.image.load('./images/overworld/christmas_bg.jpg')
         scaled_bg = pygame.transform.scale(bg, (screen_width, screen_height))
         self.display_surface.blit(scaled_bg, (0, 0))
         
+        # background overlay 
         self.image = pygame.Surface((screen_height, screen_width))
         self.image.fill('black')
         scaled_overlay = pygame.transform.scale(self.image, (screen_width, screen_height))

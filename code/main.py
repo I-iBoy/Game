@@ -56,7 +56,7 @@ game = Game()
 
 # window setup
 pygame.display.set_caption('Winter Game')
-pygame_icon = pygame.image.load('./images/window/icon.png')
+pygame_icon = pygame.image.load('./images/window/tree.png')
 pygame.display.set_icon(pygame_icon)
 
 while True:

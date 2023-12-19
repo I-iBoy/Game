@@ -38,7 +38,8 @@ class AnimatedTile(Tile):
         # self.image = self.frames[int(self.frame_index)]
     
     def update(self, x_shift):
-        # self.animate()											#NOTE - if the coin has multiple images / frames -> for the animation 
+        # self.animate()											
+        # #NOTE - if the coin has multiple images / frames -> for the animation 
         self.rect.x += x_shift
 
 class Coin(StaticTile):

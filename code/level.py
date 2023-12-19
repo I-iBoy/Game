@@ -5,7 +5,6 @@ from setting import tile_size, screen_width, font_1
 from support import import_csv_layout
 
 class Level():
-    
     def __init__(self, surface, create_overworld, change_health, level_data):
         
         # level setup
@@ -14,7 +13,7 @@ class Level():
         self.setup_extra_tiles()
         self.world_shift = 0
         self.player_speed = 2.5
-        # This may only be changed if the Player Speed has been changed (always must be the same)
+        #NOTE -  This may only be changed if the Player Speed has been changed (always must be the same)
         
         self.world_shift_setup = self.player_speed * 10
         self.current_x = 0
