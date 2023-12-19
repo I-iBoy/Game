@@ -1,17 +1,12 @@
 import pygame
-from support import import_folder
 from setting import screen_height, screen_width
 
 class Overworld():
-    def __init__(self, start_level, max_level, surface, create_level):
+    def __init__(self, surface, create_level):
         
         # setup
         self.display_surface = surface
-        self.max_level = max_level
-        self.current_level = start_level
         self.create_level = create_level
-        self.screen_height = screen_height
-        self.screen_width = screen_width
         
         # movement logic
         self.moving = False 
@@ -35,15 +30,15 @@ class Overworld():
         # background overlay 
         self.image = pygame.Surface((screen_height, screen_width))
         self.image.fill('black')
-        scaled_overlay = pygame.transform.scale(self.image, (screen_width, screen_height))
-        transparent_overlay = scaled_overlay.set_alpha(self.opacity)
-        self.display_surface.blit(scaled_overlay, (0, 0))
+        overlay = pygame.transform.scale(self.image, (screen_width, screen_height))
+        overlay.set_alpha(self.opacity)
+        self.display_surface.blit(overlay, (0, 0))
     
     def get_input(self):
         keys = pygame.key.get_pressed()
         
         if keys[pygame.K_l]:
-            self.create_level(self.current_level)
+            self.create_level()
     
     def run(self):
         self.background()

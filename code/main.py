@@ -14,17 +14,15 @@ class Game():
         self.level_map = level_map
         
         # overworld creation
-        self.overworld = Overworld(0, self.max_level, display_surface, self.create_level)
+        self.overworld = Overworld(display_surface, self.create_level)
         self.status = 'overworld'
     
-    def create_level(self, current_level):
-        self.level = Level(current_level, display_surface, self.create_overworld, self.change_health, self.level_map)
+    def create_level(self):
+        self.level = Level(display_surface, self.create_overworld,  self.level_map)
         self.status = 'level'
     
-    def create_overworld(self, current_level, new_max_level):
-        if new_max_level > self.max_level:
-            self.max_level = new_max_level
-        self.overworld = Overworld(current_level, self.max_level, display_surface, self.create_level)
+    def create_overworld(self):
+        self.overworld = Overworld(display_surface, self.create_level)
         self.status = 'overworld'
     
     def change_coins(self, amount):
