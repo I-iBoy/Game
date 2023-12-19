@@ -1,11 +1,12 @@
 import pygame
 from tiles import Tile, Coin 
 from player import Player
+from game_over import GameOver
 from setting import tile_size, screen_width, screen_height,font_1
 from support import import_csv_layout
 
 class Level():
-    def __init__(self, surface, create_overworld, level_data):
+    def __init__(self, surface, create_overworld, create_game_over,level_data):
         
         # level setup
         self.display_surface = surface 
@@ -20,6 +21,9 @@ class Level():
         
         # overworld connection
         self.create_overworld = create_overworld
+        
+        # game over connection
+        self.create_game_over = create_game_over
         
         # setup for extras 
         self.coins_amount = 0 
@@ -159,7 +163,7 @@ class Level():
     
     def check_death(self):
         if self.player.sprite.rect.top > screen_height:
-            self.create_overworld()
+            self.create_game_over(self.coins_amount)
     
     def update_and_draw(self):
         # level tiles

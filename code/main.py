@@ -2,6 +2,7 @@ import pygame, sys
 from setting import screen_width, screen_height, level_map
 from overworld import Overworld
 from level import Level
+from game_over import GameOver
 
 class Game():
     def __init__(self):
@@ -18,12 +19,16 @@ class Game():
         self.status = 'overworld'
     
     def create_level(self):
-        self.level = Level(display_surface, self.create_overworld,  self.level_map)
+        self.level = Level(display_surface, self.create_overworld,  self.create_game_over ,self.level_map)
         self.status = 'level'
     
     def create_overworld(self):
         self.overworld = Overworld(display_surface, self.create_level)
         self.status = 'overworld'
+    
+    def create_game_over(self, score):
+        self.game_over = GameOver(display_surface, self.create_level, self.create_overworld, score)
+        self.status = 'game_over'
     
     def change_coins(self, amount):
         self.coins += amount
@@ -36,12 +41,14 @@ class Game():
             self.cur_health = 100
             self.coins = 0
             self.max_level = 0
-            self.overworld = Overworld(0, self.max_level, display_surface, self.create_level)
+            self.overworld = Overworld(display_surface, self.create_level)
             self.status = 'overworld'
     
     def run(self):
         if self.status == 'overworld':
             self.overworld.run()
+        elif self.status == 'game_over':
+            self.game_over.run()
         else:
             self.level.run()
             self.check_game_over()

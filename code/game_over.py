@@ -1,14 +1,18 @@
 import pygame 
 from setting import screen_height, screen_width
 
-class Game_over():
-    def __init__(self, create_level, surface, coins):
+class GameOver():
+    def __init__(self, surface, create_level, create_overworld, score):
         
         self.create_level = create_level
-        self.score = coins
+        self.create_overworld = create_overworld
+        self.score = score
         self.display_surface = surface
+        
+        # background
+        self.opacity = 80
     
-    def death_screen(self, screen):
+    def death_screen(self):
         # background image
         bg = pygame.image.load('./images/overworld/christmas_bg.jpg')
         scaled_bg = pygame.transform.scale(bg, (screen_width, screen_height))
