@@ -6,6 +6,7 @@ class Game_over():
         
         self.create_level = create_level
         self.score = coins
+        self.display_surface = surface
     
     def death_screen(self, screen):
         # background image
@@ -17,7 +18,7 @@ class Game_over():
         self.image = pygame.Surface((screen_height, screen_width))
         self.image.fill('black')
         scaled_overlay = pygame.transform.scale(self.image, (screen_width, screen_height))
-        transparent_overlay = scaled_overlay.set_alpha(self.opacity)
+        scaled_overlay.set_alpha(self.opacity)
         self.display_surface.blit(scaled_overlay, (0, 0))
     
     def get_input(self):
