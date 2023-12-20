@@ -17,6 +17,9 @@ class Game():
         # overworld creation
         self.overworld = Overworld(display_surface, self.create_level)
         self.status = 'overworld'
+        
+        # self.game_over = GameOver(display_surface, self.create_level, self.create_overworld, 0)
+        # self.status = 'game_over'
     
     def create_level(self):
         self.level = Level(display_surface, self.create_overworld,  self.create_game_over ,self.level_map)

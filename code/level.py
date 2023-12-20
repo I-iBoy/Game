@@ -4,6 +4,7 @@ from player import Player
 from game_over import GameOver
 from setting import tile_size, screen_width, screen_height,font_1
 from support import import_csv_layout
+import time
 
 class Level():
     def __init__(self, surface, create_overworld, create_game_over,level_data):
@@ -163,6 +164,7 @@ class Level():
     
     def check_death(self):
         if self.player.sprite.rect.top > screen_height:
+            time.sleep(0.5)
             self.create_game_over(self.coins_amount)
     
     def update_and_draw(self):

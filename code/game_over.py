@@ -1,5 +1,6 @@
 import pygame 
 from setting import screen_height, screen_width
+from setting import font_1
 
 class GameOver():
     def __init__(self, surface, create_level, create_overworld, score):
@@ -32,23 +33,47 @@ class GameOver():
             self.create_level()
     
     def set_game_hight_score(self):
-        file = open('./game_data/hight_score.txt', 'r')
+        file = open('./game_data/high_score.txt', 'r')
         old_hight_score = file.read()
         
         if int(old_hight_score) < int(self.score):
-            file1 = open('./game_data/hight_score.txt', 'w')
+            file1 = open('./game_data/high_score.txt', 'w')
             file1.write(str(self.score))
             file1.close()
+        else:
+            self.score = old_hight_score
         
         file.close()
     
     def reset_hight_score(self):
-        file = open('./test/hight_score.txt', 'w')
+        file = open('./test/high_score.txt', 'w')
         file.write(str(0))
         file.close()
+    
+    def text(self, text, x, y, font_type):
+        pygame.font.init()
+        
+        # font size 
+        if font_type == 'big':
+            font_size = 55
+        elif font_type == 'small':
+            font_size = 35
+        else:
+            font_size = 35
+        
+        
+        
+        my_font = pygame.font.Font((font_1), font_size)
+        text_surface = my_font.render(text, True, (255,255,255))
+        
+        self.display_surface.blit(text_surface, (x, y))
     
     def run(self):
         self.death_screen()
         self.get_input()
         
         self.set_game_hight_score()
+        
+        # draw every font 
+        self.text('GAME OVER', 480, 150, 'big')
+        self.text((f'High Score:    {self.score}'), 480, 250, 'small')
