@@ -29,7 +29,9 @@ class GameOver():
     def get_input(self):
         keys = pygame.key.get_pressed()
         
-        if keys[pygame.K_KP_ENTER]:
+        if keys[pygame.K_BACKSPACE]:
+            self.create_overworld()
+        elif keys[pygame.K_SPACE]:
             self.create_level()
     
     def set_game_hight_score(self):
@@ -50,7 +52,7 @@ class GameOver():
         file.write(str(0))
         file.close()
     
-    def text(self, text, x, y, font_type):
+    def text(self, text, x, y, font_type=None):
         pygame.font.init()
         
         # font size 
@@ -58,8 +60,8 @@ class GameOver():
             font_size = 55
         elif font_type == 'small':
             font_size = 35
-        else:
-            font_size = 35
+        elif font_type == None:
+            font_size = 25
         
         
         
@@ -77,3 +79,5 @@ class GameOver():
         # draw every font 
         self.text('GAME OVER', 480, 150, 'big')
         self.text((f'High Score:    {self.score}'), 480, 250, 'small')
+        self.text('Press BACKSPACE to switch to the Home Screen', 480, 350)
+        self.text('Press SPACE to play again', 480, 400)
