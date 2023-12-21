@@ -58,3 +58,16 @@ class Gift(StaticTile):
         center_y = y + int(size / 2)
         self.rect = self.image.get_rect(center = (center_x, center_y))
         self.value = value
+        
+        
+        
+        
+        
+    
+    def gift_info(not_relevant):
+        pass
+        # gifts:
+        # 0 = GR
+        # 1 = RG
+        # 2 = RY
+        # 3 = YR
