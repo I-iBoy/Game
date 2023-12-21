@@ -7,7 +7,7 @@ class Player(pygame.sprite.Sprite):
         # general setup 
         self.image = pygame.Surface((size, size))
         # self.image.fill('red')
-        pygame.image.load('.\images\player\Elf_Idle.png')
+        pygame.image.load('.\images\player\idle/0.png')
         self.rect = self.image.get_rect(topleft = pos)
         
         # player movement 

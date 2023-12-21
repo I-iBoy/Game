@@ -75,7 +75,7 @@ while True:
             pygame.quit()
             sys.exit()
     
-    # display_surface.fill('black')
+    display_surface.fill('black')
     game.run()
     
     pygame.display.update()
