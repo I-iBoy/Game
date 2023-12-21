@@ -11,7 +11,7 @@ class GameOver():
         self.display_surface = surface
         
         # background
-        self.opacity = 80
+        self.opacity = 120
     
     def death_screen(self):
         # background image
@@ -79,5 +79,5 @@ class GameOver():
         # draw every font 
         self.text('GAME OVER', 480, 150, 'big')
         self.text((f'High Score:    {self.score}'), 480, 250, 'small')
-        self.text('Press BACKSPACE to switch to the Home Screen', 480, 350)
-        self.text('Press SPACE to play again', 480, 400)
+        self.text('Press BACKSPACE to switch to the Home Screen', 400, 350)
+        self.text('Press SPACE to play again', 400, 400)
