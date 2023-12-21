@@ -26,26 +26,26 @@ class StaticTile(Tile):
 class AnimatedTile(Tile):
     def __init__(self, size, x, y, path=None, value = 0):
         super().__init__(size, x, y)
-        # self.frames = import_folder(path)
-        # self.frame_index = 0
-        # self.image = self.frames[self.frame_index]
-        # self.value = value
+        self.frames = import_folder(path)
+        self.frame_index = 0
+        self.image = self.frames[self.frame_index]
+        self.value = value
     
-    # def animate(self):
-    #     self.frame_index += self.animation_speed
-    #     if self.frame_index >= len(self.frames):
-    #         self.frame_index = 0
+    def animate(self):
+        self.frame_index += self.animation_speed
+        if self.frame_index >= len(self.frames):
+            self.frame_index = 0
         
-        # self.image = self.frames[int(self.frame_index)]
+        self.image = self.frames[int(self.frame_index)]
     
     def update(self, x_shift):
-        # self.animate()											
+        self.animate()											
         # #NOTE - if the coin has multiple images / frames -> for the animation 
         self.rect.x += x_shift
 
 class Coin(StaticTile):
     def __init__(self, x, y, size, value=None):
-        super().__init__(size, x, y, pygame.image.load('.\images\coins\silver.png').convert_alpha())
+        super().__init__(size, x, y, pygame.image.load('.\images\coins\0.png').convert_alpha())
         center_x = x + int(size / 2)
         center_y = y + int(size / 2)
         self.rect = self.image.get_rect(center = (center_x, center_y))
