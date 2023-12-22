@@ -75,7 +75,12 @@ while True:
             pygame.quit()
             sys.exit()
     
-    display_surface.fill('black')
+    
+    if game.status == 'level':
+        game.level.background()
+    else:
+        display_surface.fill('black')
+    
     game.run()
     
     pygame.display.update()

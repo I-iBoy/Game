@@ -19,6 +19,7 @@ class Level():
         
         self.world_shift_setup = self.player_speed * 10
         self.current_x = 0
+        self.opacity = 120
         
         # overworld connection
         self.create_overworld = create_overworld
@@ -182,6 +183,19 @@ class Level():
         
         # extra tiles
         self.extra_tiles.draw(self.display_surface)
+    
+    def background(self):
+        # background image
+        bg = pygame.image.load('./images/overworld/christmas_bg.jpg')
+        scaled_bg = pygame.transform.scale(bg, (screen_width, screen_height))
+        self.display_surface.blit(scaled_bg, (0, 0))
+        
+        # background overlay 
+        self.image = pygame.Surface((screen_height, screen_width))
+        self.image.fill('black')
+        overlay = pygame.transform.scale(self.image, (screen_width, screen_height))
+        overlay.set_alpha(self.opacity)
+        self.display_surface.blit(overlay, (0, 0))
     
     def run(self):
         self.update_and_draw()
