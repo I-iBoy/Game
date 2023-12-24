@@ -8,9 +8,8 @@ class Tile(pygame.sprite.Sprite):
 		# tile setup
 		self.image = pygame.Surface((size,size))
 		self.image.fill('grey')
-        # pygame.image.load()
 		self.rect = self.image.get_rect(topleft = (x, y))
-        
+    
 	
 	def update(self,x_shift):
 		# move the tile 
