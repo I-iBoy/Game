@@ -64,7 +64,16 @@ class AnimatedTile1(Tile):
         # #NOTE - if the coin has multiple images / frames -> for the animation 
         self.rect.x += x_shift
 
-class Coin(AnimatedTile):
+class Coin(StaticTile):
+    def __init__(self, x, y, size, value=None):
+        super().__init__(size, x, y, pygame.image.load('.\images\coins/0.png').convert_alpha())
+        self.image = pygame.transform.scale(self.image, (size*0.6, size*0.6))
+        center_x = x + int(size / 2)
+        center_y = y + int(size / 2)
+        self.rect = self.image.get_rect(center = (center_x, center_y))
+        self.value = value
+
+class Coin1(AnimatedTile1):
     def __init__(self, x, y, size, value=None):
         super().__init__(size, x, y, pygame.image.load('.\images\coins/0.png').convert_alpha())
         self.image = pygame.transform.scale(self.image, (size*0.6, size*0.6))
