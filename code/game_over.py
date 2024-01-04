@@ -34,18 +34,15 @@ class GameOver():
         elif keys[pygame.K_SPACE]:
             self.create_level()
     
-    def set_game_hight_score(self):
-        file = open('./game_data/high_score.txt', 'r')
-        old_hight_score = file.read()
-        
-        if int(old_hight_score) < int(self.score):
-            file1 = open('./game_data/high_score.txt', 'w')
-            file1.write(str(self.score))
-            file1.close()
-        else:
-            self.score = old_hight_score
-        
-        file.close()
+    def set_game_high_score(self):
+        with open('./game_data/high_score.txt', 'r') as f:
+            old_hight_score = f.read()
+            
+            if int(old_hight_score) < int(self.score):
+                with open('./game_data/high_score.txt', 'w') as f1:
+                    f1.write(str(self.score))
+            else:
+                self.score = old_hight_score
     
     def reset_hight_score(self):
         file = open('./test/high_score.txt', 'w')
@@ -74,7 +71,7 @@ class GameOver():
         self.death_screen()
         self.get_input()
         
-        self.set_game_hight_score()
+        self.set_game_high_score()
         
         # draw every font 
         self.text('GAME OVER', 480, 150, 'big')
