@@ -5,6 +5,7 @@ from game_over import GameOver
 from setting import tile_size, screen_width, screen_height,font_1
 from support import import_csv_layout
 import time
+import math
 
 class Level():
     def __init__(self, surface, create_overworld, create_game_over,level_data):
@@ -20,6 +21,9 @@ class Level():
         self.world_shift_setup = self.player_speed * 10
         self.current_x = 0
         self.opacity = 120
+        
+        # move the background
+        self.bg_scroll = 0
         
         # overworld connection
         self.create_overworld = create_overworld
@@ -66,6 +70,31 @@ class Level():
                     coin = Coin(x, y, tile_size)
                     self.coins.add(coin)
     
+    def background(self, bg_scroll):
+        # background image
+        bg = pygame.image.load('./images/background/blue_with_clouds.webp')
+        
+        bg_height = bg.get_height()
+        bg_width = bg.get_width()
+        bg_zoom = screen_height / bg_height
+        new_bg_width = bg_width * bg_zoom
+        
+        scaled_bg = pygame.transform.scale(bg, (new_bg_width, screen_height))
+        
+        tiles = math.ceil(bg_zoom)
+        
+        for i in range(0, tiles):
+            self.display_surface.blit(scaled_bg, (i * bg_width * bg_scroll, 0))
+        
+        print(bg_scroll)
+        
+        # background overlay 
+        self.image = pygame.Surface((screen_height, screen_width))
+        self.image.fill('black')
+        overlay = pygame.transform.scale(self.image, (screen_width, screen_height))
+        overlay.set_alpha(self.opacity)
+        self.display_surface.blit(overlay, (0, 0))
+    
     def scroll_x(self):
         # scroll setup
         player = self.player.sprite
@@ -75,11 +104,13 @@ class Level():
         # left site 
         if player_x < (screen_width / 3) and direction_x < 0:
             self.world_shift = self.world_shift_setup
+            self.bg_scroll = self.world_shift_setup
             player.speed = 0
         
         # right site
         elif player_x > screen_width - (screen_width / 3) and direction_x > 0:
             self.world_shift = self.world_shift_setup * -1
+            self.bg_scroll = self.world_shift_setup * -1
             player.speed = 0
         
         # no scroll
@@ -169,6 +200,9 @@ class Level():
             self.create_game_over(self.coins_amount)
     
     def update_and_draw(self):
+        # background
+        self.background(self.bg_scroll)
+        
         # level tiles
         self.tiles.update(self.world_shift)
         self.tiles.draw(self.display_surface)
@@ -183,19 +217,6 @@ class Level():
         
         # extra tiles
         self.extra_tiles.draw(self.display_surface)
-    
-    def background(self):
-        # background image
-        bg = pygame.image.load('./images/overworld/christmas_bg.jpg')
-        scaled_bg = pygame.transform.scale(bg, (screen_width, screen_height))
-        self.display_surface.blit(scaled_bg, (0, 0))
-        
-        # background overlay 
-        self.image = pygame.Surface((screen_height, screen_width))
-        self.image.fill('black')
-        overlay = pygame.transform.scale(self.image, (screen_width, screen_height))
-        overlay.set_alpha(self.opacity)
-        self.display_surface.blit(overlay, (0, 0))
     
     def run(self):
         self.update_and_draw()
